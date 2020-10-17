@@ -51,7 +51,7 @@ Pool.prototype.end=function(){
         this._client.close(rs)
     })
 }
-Pool.prototype.proxy=function(s,h,connectOption){
+Pool.prototype.proxy=function(s,h){
     let header={
         ':method':h[':method'],
         ':path':h[':path'],
@@ -60,7 +60,7 @@ Pool.prototype.proxy=function(s,h,connectOption){
         header[i]=h[i]
     let responded
     if(!this._client||this._client.closed)
-        this._client=http2.connect(this._authority,connectOption)
+        this._client=http2.connect(this._authority,this._connectOption)
     let errorListener=e=>{
         if(!s.closed&&!responded){
             responded=1

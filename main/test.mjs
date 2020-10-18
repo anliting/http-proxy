@@ -9,25 +9,23 @@ let serverB=http2.createServer().on('stream',async(s,h)=>{
     await pool.proxy(s,h)
 }).listen('server-b')
 ;(async()=>{
-    await Promise.all([
+    process.stdout.end(`${(await Promise.all([
         a(),
         a(),
-    ])
+    ])).every(a=>a)?1:0}\n`)
     serverA.close()
     serverB.close()
     pool.end()
 })()
 function a(){
-    return new Promise(rs=>{
+    return new Promise((rs,rj)=>{
         let session=http2.connect('http://a',{path:'server-b'})
         let a=[]
         session.request({
             ':path':'/'
         }).on('data',[].push.bind(a)).on('end',()=>{
-            if(''+Buffer.concat(a)=='hello-world')
-                console.log('ok')
             session.close()
-            rs()
+            rs(''+Buffer.concat(a)=='hello-world')
         })
     })
 }

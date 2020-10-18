@@ -59,7 +59,7 @@ Pool.prototype.proxy=function(s,h){
     for(let i in h)if(i[0]!=':')
         header[i]=h[i]
     let responded
-    if(!this._client||this._client.closed)
+    if(!this._client||this._client.closed||this._client.destroyed)
         this._client=http2.connect(this._authority,this._connectOption)
     let errorListener=e=>{
         if(!s.closed&&!responded){

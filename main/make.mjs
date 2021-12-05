@@ -20,7 +20,7 @@ async function link(input,file){
 }
 ;(async()=>{
     fs.promises.writeFile('package.json',JSON.stringify({
-        main:'main.mjs',
+        main:'export/main.mjs',
         name:'@anliting/http-proxy',
         version:'0.0.0',
     }))

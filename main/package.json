@@ -1,0 +1,6 @@
+{
+    "dependencies":{
+        "rollup":"",
+        "terser":""
+    }
+}

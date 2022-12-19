@@ -1,1 +1,1 @@
-export default new Set(['connection','host','te','transfer-encoding',])
+export default new Set(['connection','host','keep-alive','te','transfer-encoding',])
